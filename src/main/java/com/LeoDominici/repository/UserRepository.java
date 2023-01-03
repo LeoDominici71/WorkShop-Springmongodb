@@ -6,6 +6,8 @@ import com.LeoDominici.domain.User;
 
 
 public interface UserRepository extends MongoRepository<User, String> {
+
+
 	
 	
 
