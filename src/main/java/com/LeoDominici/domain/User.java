@@ -1,8 +1,11 @@
 package com.LeoDominici.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "user")//pq e mongodb por isso deve usar @document
@@ -13,6 +16,8 @@ public class User implements Serializable{
 	private String id;
 	private String name;
 	private String email;
+	@DBRef(lazy = true)//se nao acessar os posts so vai vir os dados basicos do usuario
+	private List<Post> posts = new ArrayList<>();
 	
 	public User() {
 		
@@ -48,6 +53,14 @@ public class User implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
 
 	@Override
 	public int hashCode() {
@@ -73,6 +86,8 @@ public class User implements Serializable{
 			return false;
 		return true;
 	}
+
+	
 	
 	
 
